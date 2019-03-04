@@ -1,2 +1,26 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+<h1><%= @question.title %></h1>
+<p><%= @question.description%></p>
+
+
+
+<% if @question.comments.exists? %>
+<%= render partial: 'comments/comments', locals: {commentable: @question}%>
+<% end %>
+<%= render partial: 'comments/add_comment', locals: {commentable: @question}%>
+
+
+<h3>Respuestas</h3>
+
+<% if @answers.exists? %>
+    <%@answers.each do |answer|%>
+        <%= answer.description%>
+        <%= render partial: 'comments/comments', locals: {commentable: answer}%>
+        <%= render partial: 'comments/add_comment', locals: {commentable: answer}%>
+        <br>
+    <% end %>
+<% end %>
+
+<hr>
+<h3>Tu respuesta</h3>
+<%= render partial: 'form'%>
+

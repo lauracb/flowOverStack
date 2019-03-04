@@ -1,2 +1,6 @@
-<h1>Questions#new</h1>
-<p>Find me in app/views/questions/new.html.erb</p>
+<h1>Haz una nueva pregunta</h1>
+<%= form_for @question do |f|%>
+    <%= f.text_field :title, placeholder: "Ingresa el título de la pregunta" %>
+    <%= f.text_area :description, placeholder:"Ingresa la descripción de la pregunta"%>
+    <%= f.submit "Crear pregunta"%>
+<% end %>
