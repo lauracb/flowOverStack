@@ -4,6 +4,17 @@
 
 
 <% if @question.comments.exists? %>
+<% if @question.question_voted_by? current_user %>
+    <%= link_to question_vote_path(@question), method: :delete, class: "product-upvote upvote-active" do %>
+        <span class="upvote-arrow"></span>
+        <span class="upvote-count"><%= @question.votes.count %></span>
+    <% end %>
+<% else %>
+    <%= link_to question_vote_path(@question), method: :post, class: "product-upvote" do %>
+        <span class="upvote-arrow"></span>
+        <span class="upvote-count"><%= @question.votes.count %></span>
+    <% end %>
+<% end %>
 <%= render partial: 'comments/comments', locals: {commentable: @question}%>
 <% end %>
 <%= render partial: 'comments/add_comment', locals: {commentable: @question}%>
@@ -13,6 +24,18 @@
 
 <% if @answers.exists? %>
     <%@answers.each do |answer|%>
+<% if answer.answer_voted_by? current_user %>
+    <%= link_to answer_vote_path(answer), method: :delete, class: "product-upvote upvote-active" do %>
+        <span class="upvote-arrow"></span>
+        <span class="upvote-count"><%= answer.votes.count %></span>
+    <% end %>
+<% else %>
+    <%= link_to answer_vote_path(answer), method: :post, class: "product-upvote" do %>
+        <span class="upvote-arrow"></span>
+        <span class="upvote-count"><%= answer.votes.count %></span>
+    <% end %>
+<% end %>
+
         <%= answer.description%>
         <%= render partial: 'comments/comments', locals: {commentable: answer}%>
         <%= render partial: 'comments/add_comment', locals: {commentable: answer}%>

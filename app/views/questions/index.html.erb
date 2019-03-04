@@ -1,7 +1,22 @@
-<h1>Questions</h1>
+<h1>Preguntas</h1>
 <%= link_to "Hacer pregunta", new_question_path %>
 <br>
+
+
+
 <% @questions.each do |question| %>
+<% if question.question_voted_by? current_user %>
+  <%= link_to question_vote_path(question), method: :delete, class: "product-upvote upvote-active" do %>
+    <span class="upvote-arrow"></span>
+    <span class="upvote-count"><%= question.votes.count %></span>
+  <% end %>
+<% else %>
+  <%= link_to question_vote_path(question), method: :post, class: "product-upvote" do %>
+    <span class="upvote-arrow"></span>
+    <span class="upvote-count"><%= question.votes.count %></span>
+  <% end %>
+<% end %>
+
   <%= question.title%>
   <%= question.description %>
   <%= question.user.email %>
