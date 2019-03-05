@@ -1,12 +1,8 @@
-<div class="p-3 mb-3 bg-light rounded" id="comments"">
+<div class="px-2">
     <% commentable.comments.each do |comment|%>
-
-        <p class="mb-0">
-            <%= comment.user.email %>
-            <%= comment.text %></li>
+        <p class="my-3 text-secondary">
+            <%= comment.text %><br>
+            Por <%= comment.user.email %> hace <%= time_ago_in_words(comment.created_at) %>
         </p>
-        <br>
-
     <% end %>
-
 </div>

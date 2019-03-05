@@ -1,25 +1,44 @@
-<h1>Preguntas</h1>
-<%= link_to "Hacer pregunta", new_question_path %>
-<br>
+<div class="container mt-5 pt-5">
+  <div class="row">
+    <h1>Preguntas</h1>
+  </div>
+  <div class="row my-4">
+    <div class="col-sm-12">
+      <div class="text-right">
+        <%= link_to "Hacer una pregunta", new_question_path, class:"btn btn-primary text-right" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 offset-2"></div>
+      <table class="table">
+        <tbody>
+          <% @questions.each do |question| %>
+          <tr>
+            <td>
+              <div class="text-center">
+                <%= question.votes.count%>
+                <div class="text-muted">Votos</div>
+              </div>
+            </td>
+              <td>
+                <div class="text-center">
+                  <%= question.answers.count%>
+                  <div class="text-muted">Respuestas</div>
+                </div>
+              <td/>
+            <td class="col-sm-8">
+              <div class="text-left">
+                <%= link_to question.title, question_path(question.id) %>
+                <div class="text-muted">Preguntó <%= question.user.email%> hace <%= time_ago_in_words(question.created_at) %></div>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 
-
-<% @questions.each do |question| %>
-<% if question.question_voted_by? current_user %>
-  <%= link_to question_vote_path(question), method: :delete, class: "product-upvote upvote-active" do %>
-    <span class="upvote-arrow"></span>
-    <span class="upvote-count"><%= question.votes.count %></span>
-  <% end %>
-<% else %>
-  <%= link_to question_vote_path(question), method: :post, class: "product-upvote" do %>
-    <span class="upvote-arrow"></span>
-    <span class="upvote-count"><%= question.votes.count %></span>
-  <% end %>
-<% end %>
-
-  <%= question.title%>
-  <%= question.description %>
-  <%= question.user.email %>
-  <%= link_to "Ver", question_path(question.id) %>
-  <br>
-<% end %>

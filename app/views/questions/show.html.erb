@@ -1,49 +1,93 @@
-<h1><%= @question.title %></h1>
-<p><%= @question.description%></p>
+<div class="container mt-5 pt-5">
+
+  <div class="row">
+    <div class="col-sm-10 offset-1">
+        <h2><%= @question.title %></h2>
+    </div>
+  </div>
+  <div class="row my-4">
+    <div class="col-sm-2">
+      <div class="text-right">
+        <% if @question.question_voted_by? current_user %>
+          <%= link_to question_vote_path(@question), method: :delete, class: "product-upvote upvote-active" do %>
+            <span class="upvote-arrow"></span>
+            <span class="upvote-count"><%= @question.votes.count %></span>
+          <% end %>
+        <% else %>
+          <%= link_to question_vote_path(@question), method: :post, class: "product-upvote" do %>
+            <span class="upvote-arrow"></span>
+            <span class="upvote-count"><%= @question.votes.count %></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <p class="text-justify mb-4"><%= @question.description%></p>
+      <hr>
+      <% if @question.comments.exists? %>
+        <%= render partial: 'comments/comments', locals: {commentable: @question}%>
+        <hr>
+      <% end %>
+      <%= render partial: 'comments/add_comment', locals: {commentable: @question}%>
+    </div>
+  </div>
 
 
-
-<% if @question.comments.exists? %>
-<% if @question.question_voted_by? current_user %>
-    <%= link_to question_vote_path(@question), method: :delete, class: "product-upvote upvote-active" do %>
-        <span class="upvote-arrow"></span>
-        <span class="upvote-count"><%= @question.votes.count %></span>
-    <% end %>
-<% else %>
-    <%= link_to question_vote_path(@question), method: :post, class: "product-upvote" do %>
-        <span class="upvote-arrow"></span>
-        <span class="upvote-count"><%= @question.votes.count %></span>
-    <% end %>
-<% end %>
-<%= render partial: 'comments/comments', locals: {commentable: @question}%>
-<% end %>
-<%= render partial: 'comments/add_comment', locals: {commentable: @question}%>
-
-
-<h3>Respuestas</h3>
-
-<% if @answers.exists? %>
+  <div class="row my-1 mt-5 pt-3">
+    <div class="col-sm-10 offset-1">
+        <h4><%= @question.answers.count %> Respuesta(s)</h4>
+        <hr>
+    </div>
+  </div>
+  <% if @question.answers.count != 0 %>
     <%@answers.each do |answer|%>
-<% if answer.answer_voted_by? current_user %>
-    <%= link_to answer_vote_path(answer), method: :delete, class: "product-upvote upvote-active" do %>
-        <span class="upvote-arrow"></span>
-        <span class="upvote-count"><%= answer.votes.count %></span>
+      <div class="row mb-5">
+        <div class="col-sm-2">
+          <div class="text-right">
+            <% if answer.answer_voted_by? current_user %>
+              <%= link_to answer_vote_path(answer), method: :delete, class: "product-upvote upvote-active" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= answer.votes.count %></span>
+              <% end %>
+            <% else %>
+              <%= link_to answer_vote_path(answer), method: :post, class: "product-upvote" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= answer.votes.count %></span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <p class="text-justify mb-4">
+            <%= answer.description %>
+          </p>
+          <hr>
+          <% if @answers.exists? %>
+            <%= render partial: 'comments/comments', locals: {commentable: answer}%>
+          <% end %>
+          <hr>
+          <%= render partial: 'comments/add_comment', locals: {commentable: answer}%>   
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
     <% end %>
-<% else %>
-    <%= link_to answer_vote_path(answer), method: :post, class: "product-upvote" do %>
-        <span class="upvote-arrow"></span>
-        <span class="upvote-count"><%= answer.votes.count %></span>
-    <% end %>
-<% end %>
+  <% else %>
+    <div class="col-sm-10 offset-1 text-justify">
+      Si conoces a alguien que pueda responder esta pregunta por favor tímbrale y dile que lo necesitamos con urgencia.
+    </div>
+  <% end %>
 
-        <%= answer.description%>
-        <%= render partial: 'comments/comments', locals: {commentable: answer}%>
-        <%= render partial: 'comments/add_comment', locals: {commentable: answer}%>
-        <br>
-    <% end %>
-<% end %>
+  <div class="row mt-5 pt-5">
+    <div class="col-sm-10 offset-sm-1">
+      <h4>Tu respuesta</h4>
+      <hr>
+      <%= render partial: 'form'%>
+    </div>
+  </div>
+  
+</div>
 
-<hr>
-<h3>Tu respuesta</h3>
-<%= render partial: 'form'%>
+    
+
+
 
