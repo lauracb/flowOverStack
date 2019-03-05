@@ -1,1 +1,63 @@
 @import "bootstrap";
+
+.product-upvote {
+    position: relative;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 10px;
+    padding: 10px 5px;
+    width: 35px;
+  
+    .upvote-arrow {
+      border-bottom: 9px solid #534540;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 9px solid transparent;
+      left: 10px;
+      position: absolute;
+      top: 0px;
+    }
+  
+    .upvote-count {
+      display: block;
+      color: #303030;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1;
+      margin-top: 18px;
+      font-size: 18px;
+      text-decoration: none;
+    }
+  
+    &:hover .upvote-arrow { border-bottom-color: #F04500; }
+  
+    &.upvote-active {
+      .upvote-arrow { border-bottom-color: #F04500; }
+      .upvote-count { color: #F04500; }
+    }
+  }
+
+  .link-question {
+      color: #F04500;
+  }
+
+  .link-question:hover {
+    color: #c03700;
+  }
+
+  .subtitle {
+      font-size: 15px;
+  }
+
+  .title-index {
+      font-size: 20px;
+  }
+
+  .sesiones {
+    color: #F04500;
+  }
+
+  .sesiones:hover {
+    color: #c03700;
+  }

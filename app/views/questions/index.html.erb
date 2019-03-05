@@ -1,8 +1,8 @@
 <div class="container mt-5 pt-5">
   <div class="row">
-    <h1>Preguntas</h1>
+    <h1 class="mt-3">Preguntas</h1>
   </div>
-  <div class="row my-4">
+  <div class="row my-3 mb-5">
     <div class="col-sm-12">
       <div class="text-right">
         <%= link_to "Hacer una pregunta", new_question_path, class:"btn btn-primary text-right" %>
@@ -17,20 +17,20 @@
           <tr>
             <td>
               <div class="text-center">
-                <%= question.votes.count%>
-                <div class="text-muted">Votos</div>
+                <div class="title-index"><%= question.votes.count %></div>
+                <div class="text-muted subtitle">Votos</div>
               </div>
             </td>
               <td>
                 <div class="text-center">
-                  <%= question.answers.count%>
-                  <div class="text-muted">Respuestas</div>
+                  <div class="title-index"><%= question.answers.count %></div>
+                  <div class="text-muted subtitle">Respuestas</div>
                 </div>
               <td/>
             <td class="col-sm-8">
               <div class="text-left">
-                <%= link_to question.title, question_path(question.id) %>
-                <div class="text-muted">Preguntó <%= question.user.email%> hace <%= time_ago_in_words(question.created_at) %></div>
+                <%= link_to question.title, question_path(question.id), class:"link-question title-index" %>
+                <div class="text-muted subtitle">Preguntó <%= question.user.email%> hace <%= time_ago_in_words(question.created_at) %></div>
               </div>
             </td>
           </tr>
