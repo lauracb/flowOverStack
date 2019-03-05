@@ -1,26 +1,24 @@
 class AnswersController < ApplicationController
     before_action :authenticate_user!
    
-
     def create
-        @question= Question.find(params[:question_id])
-        @answer = @question.answers.build(answer_params)
-        @answer.user = current_user
-        @answer.save
-        redirect_to question_path(@question)
-        
-    
-    # @answer = @commentable.comments.new(comment_params)
-    # @answer.user = current_user
-    # if @commentable.save
-    #     redirect_to questions_path, notice: "Your comments was successfully posted..."
-    # end
+      @question= Question.find(params[:question_id])
+      @answer = @question.answers.new(answer_params)
+      @answer.user = current_user
+      if @answer.save
+        redirect_to question_path(@question), notice: "Tu respuesta se guardó exitosamente"
+      elsif @answer.errors.any?
+        redirect_to question_path(@question), alert: "No se pudo guardar ya que tu respuesta no puede ser vacía"
+      else
+        redirect_to question_path(@question), alert: "No se pudo guardar tu respuesta"
+      end
+
 end
     
     private
     
       def answer_params
-        params.require(:answer).permit(:description)
+        params.require(:answer).permit(:description, :user_id)
       end
 
       def comment_params

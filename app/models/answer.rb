@@ -4,6 +4,8 @@ class Answer < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
 
+  validates :description, presence: true
+  
   def answer_voted_by?(user)
     votes.exists?(user: user)
   end

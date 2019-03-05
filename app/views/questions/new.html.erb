@@ -3,6 +3,7 @@
     <div class="col-sm-6 offset-3">
     <h2 class="my-3">Publicar pregunta</h2>
       <%= form_for @question do |f|%>
+      <%= render 'error_messages', objeto: @question %>
         <div class="form-group">
           <%= f.text_field :title, placeholder: "Título", class: "form-control" %>
         </div>

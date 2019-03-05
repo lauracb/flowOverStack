@@ -1,0 +1,16 @@
+<% if objeto.errors.any?%>
+    <div class="alert alert-danger">
+        <p><strong>
+            <%= pluralize(objeto.errors.count, "error(es)")%>
+            impide(n) que este post sea guardado
+            </strong>
+        </p>
+        <ul>
+        <% objeto.errors.full_messages.each do |msg|%>
+        <li>
+            <%= msg %>
+        </li>
+        <% end %>
+        </ul>
+    </div>
+<% end %>
