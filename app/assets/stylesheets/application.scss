@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+body {
+  background-color: #eeeeee
+}
+
 .product-upvote {
     position: relative;
     float: left;
@@ -60,4 +64,9 @@
 
   .sesiones:hover {
     color: #c03700;
+  }
+
+  #markdown {
+    font-size: 15px;
+    color: #F04500;
   }

@@ -1,4 +1,6 @@
 class VotesController < ApplicationController
+    before_action :authenticate_user!
+
     def create
         if params[:question_id].present?
         question = Question.find(params[:question_id])
