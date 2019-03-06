@@ -1,6 +1,6 @@
 <div class="px-4">
     <% commentable.comments.each do |comment|%>
-        <p class="my-3 text-secondary" id="markdown-lyric">
+        <p class="my-3 text-secondary" id="comment-lyric">
             <%= (comment.text)%><br>
             Por <%= comment.user.email %> hace <%= time_ago_in_words(comment.created_at) %>
             <hr>
