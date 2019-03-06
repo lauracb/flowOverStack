@@ -2,7 +2,11 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   
   def index
-    @questions = Question.all.order(created_at: :desc)
+    if params[:search]
+      @questions = Question.buscar(params[:search]).order(created_at: :desc)
+    else
+      @questions = Question.all.order(created_at: :desc)
+    end
   end
 
   def show

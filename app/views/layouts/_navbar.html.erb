@@ -17,8 +17,12 @@
                 <li class="mr-3"><%= link_to "Registrarse", new_user_registration_path, class: "navbar-brand" %></li>
                 <li><%= link_to "Ingresar", new_user_session_path, class: "navbar-brand px-3" %></li>
               <% end %>
-              <li class="pr-5">
-                <input class="form-control mr-sm-2 pr-1" type="search" placeholder="Buscar" aria-label="Search">
+              <li class="pr-5 pl-3">
+              <div class="form-group">
+                <%= form_tag root_path, method:"get" do %>
+                  <%= text_field_tag :search, params[:search], placeholder: "Buscar", class: "form-control" %>
+                <% end %>
+                </div>
               </li>
               </ul>
             </div>

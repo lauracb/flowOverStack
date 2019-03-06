@@ -11,4 +11,9 @@ class Question < ApplicationRecord
   def question_voted_by?(user)
     votes.exists?(user: user)
   end
+
+  def self.buscar(query)
+		where("title like ? OR description like ?", "%#{query}%", "%#{query}%") 
+  end
+  
 end
