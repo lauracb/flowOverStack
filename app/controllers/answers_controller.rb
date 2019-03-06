@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
       if @answer.save
         redirect_to question_path(@question), notice: "Tu respuesta se guardó exitosamente"
       elsif @answer.errors.any?
-        redirect_to question_path(@question), alert: "No se pudo guardar ya que tu respuesta no puede ser vacía"
+        redirect_to question_path(@question), alert: "No se pudo guardar ya que tu respuesta no puede estar en blanco"
       else
         redirect_to question_path(@question), alert: "No se pudo guardar tu respuesta"
       end

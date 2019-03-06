@@ -3,6 +3,8 @@
     <div class="col-sm-6 offset-3">
       <h2 class="my-3">Ingresar</h2>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= devise_error_messages!%>
+        <%= render 'layouts/alerts' %>
         <div class="form-group">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"Email" %>
         </div>

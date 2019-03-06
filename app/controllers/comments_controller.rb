@@ -11,7 +11,11 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @commentable.save
-      redirect_to request.referrer, notice: "Your comments was successfully posted..."
+      redirect_to request.referrer, notice: "Tu comentario se publicó exitosamente"
+    elsif @commentable.errors.any?
+      redirect_to request.referrer, alert: "No se pudo guardar ya que tus comentarios no pueden estar en blanco"
+    else
+      redirect_to request.referrer, alert: "No se pudo guardar tu comentario"
     end
   end
   

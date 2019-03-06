@@ -1,5 +1,5 @@
 <div class="px-2">
-    <% commentable.comments.each do |comment|%>
+    <% commentable.comments.order(created_at: :desc).each do |comment|%>
         <p class="my-3 text-secondary">
             <%= comment.text %><br>
             Por <%= comment.user.email %> hace <%= time_ago_in_words(comment.created_at) %>
