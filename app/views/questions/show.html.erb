@@ -29,7 +29,9 @@
         <%= render partial: 'comments/comments', locals: {commentable: @question}%>
         <hr>
       <% end %>
-      <%= render partial: 'comments/add_comment', locals: {commentable: @question}%>
+      <% if user_signed_in?%>
+        <%= render partial: 'comments/add_comment', locals: {commentable: @question}%>
+        <% end %>
     </div>
     <div class="col-sm-1"></div>
   </div>
@@ -68,7 +70,9 @@
             <%= render partial: 'comments/comments', locals: {commentable: answer}%>
           <% end %>
           <hr>
-          <%= render partial: 'comments/add_comment', locals: {commentable: answer}%>   
+          <% if user_signed_in?%>
+            <%= render partial: 'comments/add_comment', locals: {commentable: answer}%>   
+          <% end %>
         </div>
         <div class="col-sm-1"></div>
       </div>
@@ -77,15 +81,17 @@
     <div class="col-sm-10 offset-1 text-justify">
       Si conoces a alguien que pueda responder esta pregunta por favor tímbrale y dile que lo necesitamos con urgencia.
     </div>
-  <% end %>
-
-  <div class="row mt-5 pt-5">
-    <div class="col-sm-11">
-      <h4>Tu respuesta</h4>
-      <hr>
-      <%= render partial: 'form'%>
+  <% end %> 
+  
+  <% if user_signed_in?%>
+    <div class="row mt-5 pt-5">
+      <div class="col-sm-11">
+        <h4>Tu respuesta</h4>
+        <hr>
+        <%= render partial: 'form'%>
+      </div>
     </div>
-  </div>
+  <% end %>
   
 </div>
 
